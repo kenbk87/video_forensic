@@ -102,7 +102,7 @@ class UI(QMainWindow):
                 self.lay_MD5_file(duong_dan)
             else:
                 self.lay_MD5(duong_dan)
-        except:
+        finally:
             QMessageBox.warning(self, 'Thông báo:', 'Chưa chọn đường dẫn đến file hoặc thư mục')
             self.edt_log.append('Chưa chọn đường dẫn đến file hoặc thư mục ---> Bấm chọn tệp tin hoặc thư mục')
             print('Chưa chọn đường dẫn đến file hoặc thư mục')
@@ -211,7 +211,7 @@ class UI(QMainWindow):
                     self.xem_thong_tin_mot_file(duong_dan)
                 else:
                     pass
-            except:
+            finally:
                 pass
 
     def xem_thong_tin_mot_file(self, duong_dan_file):
@@ -245,7 +245,7 @@ class UI(QMainWindow):
 
                 else:
                     pass
-            except:
+            finally:
                 pass
 
     def hyper_link(self, thu_muc_luu):
@@ -273,7 +273,7 @@ class UI(QMainWindow):
                     print('Da convert xong..!')
                 else:
                     pass
-            except:
+            finally:
                 pass
 
 
