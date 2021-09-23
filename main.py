@@ -103,9 +103,10 @@ class UI(QMainWindow):
             else:
                 self.lay_MD5(duong_dan)
         finally:
-            QMessageBox.warning(self, 'Thông báo:', 'Chưa chọn đường dẫn đến file hoặc thư mục')
-            self.edt_log.append('Chưa chọn đường dẫn đến file hoặc thư mục ---> Bấm chọn tệp tin hoặc thư mục')
-            print('Chưa chọn đường dẫn đến file hoặc thư mục')
+            if duong_dan == '':
+                QMessageBox.warning(self, 'Thông báo:', 'Chưa chọn đường dẫn đến file hoặc thư mục')
+                self.edt_log.append('Chưa chọn đường dẫn đến file hoặc thư mục ---> Bấm chọn tệp tin hoặc thư mục')
+                print('Chưa chọn đường dẫn đến file hoặc thư mục')
 
     # Hàm lấy mã MD5 của 01 file riêng lẻ:
     def lay_MD5_file(self, duong_dan):
@@ -122,8 +123,10 @@ class UI(QMainWindow):
             elif self.rd_sha256.isChecked():
                 loai_ma = 'mã SHA256'
                 ma_hash = hashlib.md5(open(duong_dan, 'rb').read()).hexdigest()
-            dung_luong = self.dungluong(duong_dan)
-            self.edt_ket_qua_hash.append(f'Tệp tin: {str(ten_file)}, {loai_ma}: {ma_hash}, dung lượng: {dung_luong} \n')
+            # dung_luong = self.dungluong(duong_dan)
+
+            # self.edt_ket_qua_hash.append(f'Tệp tin: {str(ten_file)}, {loai_ma}: {ma_hash}, dung lượng: {dung_luong} \n')
+            self.edt_ket_qua_hash.append(f'Tệp tin: {str(ten_file)}, {loai_ma}: {ma_hash}.')
             self.edt_log.append(f'Đã thực hiện lấy {loai_ma} xong.')
 
     # Hàm lấy mã MD5 của tất cả các file có trong thư mục:
@@ -155,8 +158,10 @@ class UI(QMainWindow):
             if os.path.isfile(dd_tuyet_doi):
                 ma_hash_tep_tin = self.generate_file_hash(duong_dan, str(i), blocksize=2 ** 20)
                 dung_luong = self.dungluong(dd_tuyet_doi)
+                # self.edt_ket_qua_hash.append(
+                #     f'- Tệp tin {dem}: {i}, {loai_ma}: {ma_hash_tep_tin}, dung lượng: {dung_luong}.\n')
                 self.edt_ket_qua_hash.append(
-                    f'- Tệp tin {dem}: {i}, {loai_ma}: {ma_hash_tep_tin}, dung lượng: {dung_luong}.\n')
+                    f'- Tệp tin {dem}: {i}, {loai_ma}: {ma_hash_tep_tin}.')
 
                 # Set giá trị progress bar:
                 self.pb_progress_bar.setValue(dem)
